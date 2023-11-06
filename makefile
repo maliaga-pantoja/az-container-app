@@ -1,6 +1,3 @@
 PWD=$(shell pwd)
-PROJECT_NAME="my-project"
-REGION="EASTUS"
-IMAGE_NAME="nginx"
-IMAGE_TAG="latest"
+# overrides
 include devops/makefiles/*.mk
