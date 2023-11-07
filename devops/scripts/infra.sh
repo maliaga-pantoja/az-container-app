@@ -5,7 +5,6 @@ script_load_env ()
     source ./devops/scripts/env.sh
 }
 
-
 script_terraform ()
 {
     # loading env file
@@ -26,27 +25,27 @@ script_terraform ()
     hashicorp/terraform:1.6 $1
 }
 
-script_terraform_init () 
+script_terraform_init ()
 {
     script_terraform "init"
 }
 
-script_terraform_plan () 
+script_terraform_plan ()
 {
     script_terraform "plan"
 }
 
-script_terraform_apply () 
+script_terraform_apply ()
 {
     script_terraform "apply -auto-approve"
 }
 
-script_terraform_destroy () 
+script_terraform_destroy ()
 {
     script_terraform "destroy -auto-approve"
 }
 
-script_terraform_output () 
+script_terraform_output ()
 {
     script_terraform "output"
 }
