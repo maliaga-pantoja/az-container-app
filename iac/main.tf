@@ -42,4 +42,14 @@ resource "azurerm_container_app" "example" {
       latest_revision = true
     }
   }
+
+  secret {
+    name = "PAT"
+    value = var.PAT
+  }
+  registry {
+    server = var.CR_HOST
+    password_secret_name = "PAT"
+    username = var.USERNAME
+  }
 }

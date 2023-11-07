@@ -20,6 +20,7 @@ script_terraform ()
         -e TF_VAR_PROJECT_NAME=$PROJECT_NAME  \
         -e TF_VAR_REGION=$REGION \
         -e TF_VAR_IMAGE_NAME=$IMAGE_NAME \
+        -e TF_VAR_PAT=$PAT \
         -e TF_VAR_IMAGE_TAG=$IMAGE_TAG  \
         -w /app \
     hashicorp/terraform:1.6 $1

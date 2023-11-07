@@ -43,4 +43,16 @@ variable "CONTAINER_MEMORY" {
 variable "CR_HOST" {
   type = string
   default = "ghcr.io"
+  description = "container registry name"
+}
+
+variable "PAT" {
+  type = string
+  description = "token secret for container registry"
+}
+
+variable "USERNAME" {
+  type = string
+  description = "container registry username"
+  default = "maliaga-pantoja"
 }
