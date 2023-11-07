@@ -1,2 +1,2 @@
 build_image:
-	docker build -t 
+	./devops/scripts/build.sh script_build
