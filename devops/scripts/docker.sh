@@ -27,4 +27,13 @@ script_build ()
     docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
 }
 
+script_deploy ()
+{
+    # loading env file 
+    script_load_env
+    # configure local env vars
+    script_configure_env
+    # push
+    docker push -a $CR_HOST/$IMAGE_NAME:$IMAGE_TAG
+}
 "$@"
