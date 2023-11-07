@@ -26,7 +26,7 @@ resource "azurerm_container_app" "example" {
   template {
     container {
       name   = "container-${var.PROJECT_NAME}"
-      image  = "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest2" #"${var.IMAGE_NAME}:${var.IMAGE_TAG}"
+      image  = "${var.CR_HOST}/${var.IMAGE_NAME}:${var.IMAGE_TAG}"
       cpu    = var.CONTAINER_CPU
       memory = var.CONTAINER_MEMORY
     }

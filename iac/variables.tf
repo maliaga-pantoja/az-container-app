@@ -39,3 +39,8 @@ variable "CONTAINER_MEMORY" {
     type = string
     default = "0.5Gi"
 }
+
+variable "CR_HOST" {
+  type = string
+  default = "ghcr.io"
+}
