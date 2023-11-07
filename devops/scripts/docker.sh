@@ -17,6 +17,4 @@ script_login ()
     echo $PAT | docker login $CR_HOST -u $GITHUB_ACTOR --password-stdin
 }
 
-
-
 "$@"
