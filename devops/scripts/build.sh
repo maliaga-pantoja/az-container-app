@@ -5,7 +5,6 @@ script_load_env ()
     source ./devops/scripts/env.sh
 }
 
-
 script_build ()
 {
     # loading env file 
