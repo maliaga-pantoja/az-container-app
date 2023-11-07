@@ -1,0 +1,9 @@
+name: ci/cd
+
+on: [push]
+jobs:
+  CI:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: login to ghcr
+        run: make login
