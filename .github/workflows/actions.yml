@@ -5,5 +5,7 @@ jobs:
   CI:
     runs-on: ubuntu-20.04
     steps:
-      - name: login to ghcr
-        run: make login
+    - name: checkout repo
+      uses: actions/checkout@main
+    - name: login to ghcr
+      run: make login
