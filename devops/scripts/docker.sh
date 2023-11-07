@@ -13,7 +13,7 @@ script_login ()
     # configure local env vars
     script_configure_env
     # login to container registry: github
-    echo $PAT | docker login $GITHUB_CR -u $GITHUB_ACTOR --password-stdin
+    echo $PAT | docker login $CR_HOST -u $GITHUB_ACTOR --password-stdin
 }
 
 
