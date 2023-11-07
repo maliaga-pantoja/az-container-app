@@ -9,7 +9,7 @@ script_load_env ()
 script_image_deploy ()
 {
     # loading env file
-    script_load_env
+    script_load_env 
     # configure local env vars
     script_configure_env
 

@@ -6,7 +6,7 @@ script_configure_env ()
     export IMAGE_TAG="${GITHUB_SHA:-latest}"
     export PROJECT_NAME=$(echo $REPONAME | cut -d "/" -f2)
     export REGION="${REGION:-EASTUS}"
-    export IMAGE_NAME=$REPONAME
+    export IMAGE_NAME=$REPONAME 
 }
 
 "$@"

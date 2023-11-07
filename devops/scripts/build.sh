@@ -8,7 +8,7 @@ script_load_env ()
 
 script_build ()
 {
-    # loading env file
+    # loading env file 
     script_load_env
     # configure local env vars
     script_configure_env
