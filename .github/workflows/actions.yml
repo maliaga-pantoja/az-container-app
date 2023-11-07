@@ -9,4 +9,6 @@ jobs:
       uses: actions/checkout@main
     - name: login to ghcr
       shell: bash
+      env:
+        PAT: ${{ secrets.PAT }}
       run: make login
