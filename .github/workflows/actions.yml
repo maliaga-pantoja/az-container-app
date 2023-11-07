@@ -19,3 +19,20 @@ jobs:
     - name: deploy
       shell: bash
       run: make deploy_image
+  CD:
+    env:
+      PAT: ${{ secrets.PAT }}
+      CR_HOST: ${{ vars.CR_HOST }}
+    runs-on: ubuntu-20.04
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@main
+    - name: init terraform
+      shell: bash
+      run: make init
+    - name: plan terraform
+      shell: bash
+      run: make plan
+    - name: apply terraform
+      shell: bash
+      run: make apply
