@@ -8,5 +8,5 @@ jobs:
     - name: checkout repo
       uses: actions/checkout@main
     - name: login to ghcr
-      shell: bash-wrapper {0}
+      shell: bash
       run: make login
