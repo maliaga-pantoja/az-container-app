@@ -35,4 +35,5 @@ script_deploy ()
     script_configure_env
     # push
     docker push $CR_HOST/$IMAGE_NAME
+}
 "$@"
