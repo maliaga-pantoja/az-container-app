@@ -18,4 +18,4 @@ jobs:
       run: make build_image
     - name: deploy
       shell: bash
-      run: make login
+      run: make script_deploy
