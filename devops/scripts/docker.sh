@@ -34,6 +34,6 @@ script_deploy ()
     # configure local env vars
     script_configure_env
     # push
-    docker push $CR_HOST/$IMAGE_NAME
+    docker push -a $CR_HOST/$IMAGE_NAME
 }
 "$@"
