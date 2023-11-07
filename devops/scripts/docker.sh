@@ -36,4 +36,14 @@ script_deploy ()
     # push
     docker push -a $CR_HOST/$IMAGE_NAME
 }
+
+script_lint ()
+{
+    # loading env file 
+    script_load_env
+    # configure local env vars
+    script_configure_env
+    docker run --rm -i ghcr.io/hadolint/hadolint < app/Dockerfile
+}
+
 "$@"

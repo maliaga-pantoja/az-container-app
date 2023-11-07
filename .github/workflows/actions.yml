@@ -10,6 +10,9 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@main
+    - name: lint docker image
+      shell: bash
+      run: make lint
     - name: login to ghcr
       shell: bash
       run: make login
