@@ -23,8 +23,8 @@ script_build ()
     script_load_env
     # configure local env vars
     script_configure_env
-    docker build -t $IMAGE_NAME:$IMAGE_TAG ./app
-    docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
+    docker build -t $CR_HOST/$IMAGE_NAME:$IMAGE_TAG ./app
+    docker tag $CR_HOST/$IMAGE_NAME:$IMAGE_TAG $CR_HOST/$IMAGE_NAME:latest
 }
 
 script_deploy ()
