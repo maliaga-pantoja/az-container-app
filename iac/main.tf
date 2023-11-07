@@ -44,12 +44,12 @@ resource "azurerm_container_app" "example" {
   }
 
   secret {
-    name = "PAT"
+    name = "pat"
     value = var.PAT
   }
   registry {
     server = var.CR_HOST
-    password_secret_name = "PAT"
+    password_secret_name = "pat"
     username = var.USERNAME
   }
 }
