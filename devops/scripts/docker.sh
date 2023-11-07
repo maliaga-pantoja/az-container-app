@@ -6,14 +6,16 @@ script_load_env ()
 }
 
 
-script_build ()
+script_login ()
 {
     # loading env file
     script_load_env
     # configure local env vars
     script_configure_env
-    docker build -t $IMAGE_NAME:$IMAGE_TAG ./app
-    docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
+    # login to container registry: github
+    echo $PAT | docker login $GITHUB_CR -u $GITHUB_ACTOR --password-stdin
 }
-x
+
+
+
 "$@"

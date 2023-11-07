@@ -6,14 +6,12 @@ script_load_env ()
 }
 
 
-script_build ()
+script_image_deploy ()
 {
     # loading env file
     script_load_env
     # configure local env vars
     script_configure_env
-    docker build -t $IMAGE_NAME:$IMAGE_TAG ./app
-    docker tag $IMAGE_NAME:$IMAGE_TAG $IMAGE_NAME:latest
+
+    docker push -a $GITHUB_CR/$IMAGE_NAME:$IMAGE_TAG
 }
-x
-"$@"

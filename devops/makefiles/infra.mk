@@ -11,7 +11,7 @@ tf:
 	-w /app \
 	hashicorp/terraform:1.6 ${COMMAND}
 init:
-	./devops/scripts/infra.sh script_terraform_init
+	./devops/scripts/infra.sh 
 plan:
 	./devops/scripts/infra.sh script_terraform_plan
 apply:

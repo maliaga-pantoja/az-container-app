@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 script_configure_env () 
 {
     REPONAME="${GITHUB_REPOSITORY:-owner/repo}"
@@ -6,7 +7,6 @@ script_configure_env ()
     export PROJECT_NAME=$(echo $REPONAME | cut -d "/" -f2)
     export REGION="${REGION:-EASTUS}"
     export IMAGE_NAME=$REPONAME
-
 }
 
 "$@"

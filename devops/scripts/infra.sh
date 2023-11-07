@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/bin/sh
+
 script_load_env ()
 {
     source ./devops/scripts/env.sh
@@ -49,4 +50,5 @@ script_terraform_output ()
 {
     script_terraform "output"
 }
+
 "$@"
