@@ -20,6 +20,7 @@ jobs:
       shell: bash
       run: make deploy_image
   CD:
+    needs: [ CI ]
     env:
       PAT: ${{ secrets.PAT }}
       CR_HOST: ${{ vars.CR_HOST }}
