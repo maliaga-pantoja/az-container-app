@@ -11,4 +11,5 @@ jobs:
       shell: bash
       env:
         PAT: ${{ secrets.PAT }}
+        CR_HOST: ${{ vars.CR_HOST }}
       run: make login

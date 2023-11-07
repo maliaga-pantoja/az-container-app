@@ -13,5 +13,5 @@ script_image_deploy ()
     # configure local env vars
     script_configure_env
 
-    docker push -a $GITHUB_CR/$IMAGE_NAME:$IMAGE_TAG
+    docker push -a $CR_HOST/$IMAGE_NAME:$IMAGE_TAG
 }
