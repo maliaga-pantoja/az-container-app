@@ -4,7 +4,7 @@ on: [push]
 jobs:
   SECURITY:
     env:
-      SYNK_TOKEN: ${{ secret.SNYK_TOKEN }}
+      SYNK_TOKEN: ${{ secrets.SNYK_TOKEN }}
     runs-on: ubuntu-20.04
     steps:
     - name: checkout repo
