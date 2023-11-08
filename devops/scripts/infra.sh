@@ -51,4 +51,15 @@ script_terraform_output ()
     script_terraform "output"
 }
 
+script_terraform_doc ()
+{
+    # loading env file
+    script_load_env 
+    # configure local env vars
+    script_configure_env
+    # running base tf script
+    docker run --rm -v "$PWD/iac:/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:0.16.0 markdown /terraform-docs > ./iac/README.md
+}
+
+
 "$@"
