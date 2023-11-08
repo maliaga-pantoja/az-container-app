@@ -17,6 +17,7 @@ jobs:
         name: iac_report
         path: iac/vuln.json
   CI:
+    needs: [ SECURITY ]
     env:
       PAT: ${{ secrets.PAT }}
       CR_HOST: ${{ vars.CR_HOST }}
