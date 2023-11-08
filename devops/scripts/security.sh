@@ -13,7 +13,7 @@ script_security_iac ()
     script_configure_env
     # running base tf script
     docker run --rm -e SNYK_TOKEN=$SNYK_TOKEN -v "$PWD/iac:/app" \
-        -w /app snyk/snyk:alpine "/usr/local/bin/snyk iac test --json --json-file-output=iac_report.json"
+        -w /app snyk/snyk:alpine "/usr/local/bin/snyk iac test --org=123b175c-264a-4a8f-907a-b562b92fe0b6 --json --json-file-output=iac_report.json"
 }
 
 script_security_app ()
@@ -24,7 +24,7 @@ script_security_app ()
     script_configure_env
     # running base tf script
     docker run --rm -e SNYK_TOKEN=$SNYK_TOKEN -v "$PWD/app:/app" \
-        -w /app snyk/snyk:alpine "/usr/local/bin/snyk code test --json --json-file-output=app_report.json"
+        -w /app snyk/snyk:alpine "/usr/local/bin/snyk code test --org=123b175c-264a-4a8f-907a-b562b92fe0b6 --json --json-file-output=app_report.json"
 }
 
 "$@"
