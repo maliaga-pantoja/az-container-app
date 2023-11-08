@@ -61,5 +61,9 @@ script_terraform_doc ()
     docker run --rm -v "$PWD/iac:/terraform-docs" -u $(id -u) quay.io/terraform-docs/terraform-docs:0.16.0 markdown /terraform-docs > ./iac/README.md
 }
 
+script_security ()
+{
+    docker run --rm -it -e SNYK_TOKEN=$SNYK_TOKEN -v "$PWD/iac:/app" snyk/snyk:linux
+}
 
 "$@"

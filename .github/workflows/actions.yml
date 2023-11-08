@@ -2,6 +2,20 @@ name: ci/cd
 
 on: [push]
 jobs:
+  SECURITY:
+    env:
+      SYNK_TOKEN: ${{ secret.SNYK_TOKEN }}
+    runs-on: ubuntu-20.04
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@main
+    - name: scan iac
+      shell: bash
+      run: make scan_iac
+    - uses: actions/upload-artifact@v3
+      with:
+        name: iac_report
+        path: iac/vuln.json
   CI:
     env:
       PAT: ${{ secrets.PAT }}
