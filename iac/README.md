@@ -32,7 +32,9 @@ No modules.
 | <a name="input_CR_HOST"></a> [CR\_HOST](#input\_CR\_HOST) | container registry name | `string` | `"ghcr.io"` | no |
 | <a name="input_IMAGE_NAME"></a> [IMAGE\_NAME](#input\_IMAGE\_NAME) | n/a | `string` | n/a | yes |
 | <a name="input_IMAGE_TAG"></a> [IMAGE\_TAG](#input\_IMAGE\_TAG) | n/a | `string` | n/a | yes |
+| <a name="input_JWT_SECRET"></a> [JWT\_SECRET](#input\_JWT\_SECRET) | JWT SECRET | `string` | n/a | yes |
 | <a name="input_LAW_RETENTION"></a> [LAW\_RETENTION](#input\_LAW\_RETENTION) | Log analytics workspace retention days | `number` | `30` | no |
+| <a name="input_MONGODB_URI"></a> [MONGODB\_URI](#input\_MONGODB\_URI) | mongodb uri | `string` | n/a | yes |
 | <a name="input_PAT"></a> [PAT](#input\_PAT) | token secret for container registry | `string` | n/a | yes |
 | <a name="input_PROJECT_NAME"></a> [PROJECT\_NAME](#input\_PROJECT\_NAME) | project name: cant contain special characters | `string` | n/a | yes |
 | <a name="input_REGION"></a> [REGION](#input\_REGION) | Region allowed:  EASTUS, EASTUS2 | `string` | n/a | yes |
