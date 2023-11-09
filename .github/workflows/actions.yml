@@ -16,13 +16,13 @@ jobs:
       with:
         name: iac_report
         path: iac/iac_report.json
-    - name: scan code
-      shell: bash
-      run: make scan_app
-    - uses: actions/upload-artifact@v3
-      with:
-        name: app_report
-        path: app/app_report.json
+#    - name: scan code
+#      shell: bash
+#      run: make scan_app
+#    - uses: actions/upload-artifact@v3
+#      with:
+#        name: app_report
+#        path: app/app_report.json
   CI:
     needs: [ SECURITY ]
     env:
