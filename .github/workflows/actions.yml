@@ -23,7 +23,7 @@ jobs:
 #      with:
 #        name: app_report
 #        path: app/app_report.json
-  CI:
+  BUILD_DEPLOY_IMAGE:
     needs: [ SECURITY ]
     env:
       PAT: ${{ secrets.PAT }}
@@ -44,8 +44,30 @@ jobs:
     - name: deploy
       shell: bash
       run: make deploy_image
-  CD:
-    needs: [ CI ]
+  INFRA_PLAN:
+    needs: [ SECURITY ]
+    env:
+      PAT: ${{ secrets.PAT }}
+      CR_HOST: ${{ vars.CR_HOST }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      PORT: ${{ vars.PORT }}
+    runs-on: ubuntu-20.04
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@main
+    - name: init terraform
+      shell: bash
+      run: make init
+    - name: plan terraform
+      shell: bash
+      run: make plan
+  INFRA_APPLY:
+    needs: [ INFRA_PLAN ]
     environment: 
       name: apply
     env:
@@ -62,12 +84,6 @@ jobs:
     steps:
     - name: checkout repo
       uses: actions/checkout@main
-    - name: generate doc
-      shell: bash
-      run: make doc
-    - uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: updating doc
     - name: init terraform
       shell: bash
       run: make init
