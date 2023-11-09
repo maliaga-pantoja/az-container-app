@@ -29,6 +29,18 @@ resource "azurerm_container_app" "example" {
       image  = "${var.CR_HOST}/${var.IMAGE_NAME}:${var.IMAGE_TAG}"
       cpu    = var.CONTAINER_CPU
       memory = var.CONTAINER_MEMORY
+      env {
+        name = "PORT"
+        value = 80
+      }
+      env {
+        name = "JWT_SECRET"
+        value = var.JWT_SECRET
+      }
+      env {
+        name = "MONGODB_URI"
+        value = var.MONGODB_URI
+      }
     }
   }
 

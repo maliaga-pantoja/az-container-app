@@ -56,3 +56,16 @@ variable "USERNAME" {
   description = "container registry username"
   default = "maliaga-pantoja"
 }
+
+
+
+# CONTAINER ENV VARS
+variable "JWT_SECRET" {
+  type = string
+  description = "JWT SECRET"
+}
+
+variable "MONGODB_URI" {
+  type = string
+  description = "mongodb uri"
+}
