@@ -1,1 +1,4 @@
-FROM nginx:1.25.3
+FROM oven/bun:1.0-debian
+WORKDIR /app
+COPY ./ .
+RUN bun install 
