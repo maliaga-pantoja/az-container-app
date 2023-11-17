@@ -16,6 +16,9 @@ jobs:
       with:
         name: iac_report
         path: iac/iac_report.json
+    - name: sonar sanner
+      shell: bash
+      run: make scan_app_sonarcloud
 #    - name: scan code
 #      shell: bash
 #      run: make scan_app

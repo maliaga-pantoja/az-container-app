@@ -27,4 +27,16 @@ script_security_app ()
         -w /app snyk/snyk:alpine "/usr/local/bin/snyk code test --org=123b175c-264a-4a8f-907a-b562b92fe0b6 --json --json-file-output=app_report.json"
 }
 
+script_sonar_scanner_app ()
+{
+    # loading env file
+    script_load_env 
+    # configure local env vars
+    script_configure_env
+    # running base tf script
+    docker run --rm \
+        -e SONAR_TOKEN=$SONAR_CLOUD_TOKEN \
+        -v "$PWD/app:/usr/src" \
+        sonarsource/sonar-scanner-cli
+}
 "$@"
