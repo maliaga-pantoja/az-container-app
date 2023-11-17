@@ -5,6 +5,7 @@ jobs:
   SECURITY:
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      SONAR_CLOUD_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }}
     runs-on: ubuntu-20.04
     steps:
     - name: checkout repo
