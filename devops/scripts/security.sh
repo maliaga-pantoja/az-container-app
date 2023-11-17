@@ -36,7 +36,7 @@ script_sonar_scanner_app ()
     # running base tf script
     docker run --rm \
         -e SONAR_HOST_URL="https://sonarcloud.io" \
-        -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=wyracocha_az-container-app" \
+        -e SONAR_SCANNER_OPTS="-Dsonar.organization=wyracocha -Dsonar.projectKey=wyracocha_az-container-app" \
         -e SONAR_TOKEN=$SONAR_CLOUD_TOKEN \
         -v "$PWD/app:/usr/src" \
         sonarsource/sonar-scanner-cli
