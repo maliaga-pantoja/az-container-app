@@ -73,6 +73,10 @@ script_terraform_cost ()
     docker run --rm \
         -e INFRACOST_API_KEY=$INFRACOST_API_KEY \
         -w /code \
+        -v "$PWD/iac:/code" infracost/infracost:ci-latest breakdown --path . --show-skipped
+    docker run --rm \
+        -e INFRACOST_API_KEY=$INFRACOST_API_KEY \
+        -w /code \
         -v "$PWD/iac:/code" infracost/infracost:ci-latest breakdown --path . --show-skipped --format json --out-file infracost-base.json
 
     docker run --rm \
