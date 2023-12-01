@@ -71,18 +71,13 @@ script_security ()
 script_terraform_cost ()
 {
     docker run --rm \
-        -e ARM_CLIENT_ID=$ARM_CLIENT_ID \
-        -e ARM_CLIENT_SECRET=$ARM_CLIENT_SECRET \
-        -e ARM_TENANT_ID=$ARM_TENANT_ID \
-        -e ARM_SUBSCRIPTION_ID=$ARM_SUBSCRIPTION_ID \
-        -e TF_VAR_PROJECT_NAME=$PROJECT_NAME  \
-        -e TF_VAR_REGION=$REGION \
-        -e TF_VAR_IMAGE_NAME=$IMAGE_NAME \
-        -e TF_VAR_PAT=$PAT \
-        -e TF_VAR_IMAGE_TAG=$IMAGE_TAG  \
-        -e TF_VAR_JWT_SECRET=$JWT_SECRET \
-        -e TF_VAR_MONGODB_URI=$MONGODB_URI \
         -e INFRACOST_API_KEY=$INFRACOST_API_KEY \
-        -v "$PWD/iac:/code" infracost/infracost:ci-latest breakdown --path /code --show-skipped --out-file infracost
+        -w /code \
+        -v "$PWD/iac:/code" infracost/infracost:ci-latest breakdown --path . --show-skipped --format json --out-file infracost-base.json
+
+    docker run --rm \
+        -e INFRACOST_API_KEY=$INFRACOST_API_KEY \
+        -w /code \
+        -v "$PWD/iac:/code" infracost/infracost:ci-latest  upload --path infracost-base.json
 }
 "$@"

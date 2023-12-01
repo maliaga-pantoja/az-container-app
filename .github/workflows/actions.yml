@@ -41,7 +41,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: cost_report
-        path: iac/infracost
+        path: iac/infracost-base.json
   BUILD_DEPLOY_IMAGE:
     needs: [ SECURITY ]
     env:
