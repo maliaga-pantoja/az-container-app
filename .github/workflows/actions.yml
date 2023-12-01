@@ -6,7 +6,6 @@ jobs:
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       SONAR_CLOUD_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }} 
-      INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
     runs-on: ubuntu-20.04
     steps:
     - name: checkout repo
@@ -21,9 +20,6 @@ jobs:
     - name: sonar sanner
       shell: bash
       run: make scan_app_sonarcloud
-    - name: infra cost
-      shell: bash
-      run: make cost
 #    - name: scan code
 #      shell: bash
 #      run: make scan_app
@@ -31,6 +27,21 @@ jobs:
 #      with:
 #        name: app_report
 #        path: app/app_report.json
+  COST_ANALYSIS:
+    needs: [ SECURITY ]
+    env:
+      INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
+    runs-on: ubuntu-20.04
+    steps:
+    - name: checkout repo
+      uses: actions/checkout@main
+    - name: infra cost
+      shell: bash
+      run: make cost
+    - uses: actions/upload-artifact@v3
+      with:
+        name: cost_report
+        path: iac/infracost
   BUILD_DEPLOY_IMAGE:
     needs: [ SECURITY ]
     env:

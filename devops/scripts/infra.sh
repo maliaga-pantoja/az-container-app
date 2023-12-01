@@ -83,6 +83,6 @@ script_terraform_cost ()
         -e TF_VAR_JWT_SECRET=$JWT_SECRET \
         -e TF_VAR_MONGODB_URI=$MONGODB_URI \
         -e INFRACOST_API_KEY=$INFRACOST_API_KEY \
-        -v "$PWD/iac:/code" infracost/infracost:ci-latest breakdown --path /code
+        -v "$PWD/iac:/code" infracost/infracost:ci-latest breakdown --path /code --show-skipped --out-file infracost
 }
 "$@"
