@@ -5,7 +5,8 @@ jobs:
   SECURITY:
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-      SONAR_CLOUD_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }}
+      SONAR_CLOUD_TOKEN: ${{ secrets.SONAR_CLOUD_TOKEN }} 
+      INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
     runs-on: ubuntu-20.04
     steps:
     - name: checkout repo
@@ -20,6 +21,9 @@ jobs:
     - name: sonar sanner
       shell: bash
       run: make scan_app_sonarcloud
+    - name: infra cost
+      shell: bash
+      run: make cost
 #    - name: scan code
 #      shell: bash
 #      run: make scan_app

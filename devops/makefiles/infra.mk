@@ -10,3 +10,5 @@ output:
 	./devops/scripts/infra.sh script_terraform_output
 doc:
 	./devops/scripts/infra.sh script_terraform_doc
+cost:
+	./devops/scripts/infra.sh script_terraform_cost
