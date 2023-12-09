@@ -3,7 +3,7 @@ resource "azurerm_resource_group" "rg" {
   location = var.REGION
 }
 
-resource "azurerm_log_analytics_workspace" "example" {
+resource "azurerm_log_analytics_workspace" "law01" {
   name                = "law-${var.PROJECT_NAME}"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -11,57 +11,50 @@ resource "azurerm_log_analytics_workspace" "example" {
   retention_in_days   = var.LAW_RETENTION
 }
 
-resource "azurerm_container_app_environment" "example" {
-  name                       = "cae-${var.PROJECT_NAME}"
-  location                   = azurerm_resource_group.rg.location
-  resource_group_name        = azurerm_resource_group.rg.name
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
+resource "azurerm_virtual_network" "vn" {
+  name = "vnt-${var.PROJECT_NAME}"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  address_space = [ "10.10.0.0/24" ]
 }
-resource "azurerm_container_app" "example" {
-  name                         = "cap-${var.PROJECT_NAME}"
-  container_app_environment_id = azurerm_container_app_environment.example.id
-  resource_group_name          = azurerm_resource_group.rg.name
-  revision_mode                = "Multiple"
 
-  template {
-    container {
-      name   = "container-${var.PROJECT_NAME}"
-      image  = "${var.CR_HOST}/${var.IMAGE_NAME}:${var.IMAGE_TAG}"
-      cpu    = var.CONTAINER_CPU
-      memory = var.CONTAINER_MEMORY
-      env {
-        name = "PORT"
-        value = 80
-      }
-      env {
-        name = "JWT_SECRET"
-        value = var.JWT_SECRET
-      }
-      env {
-        name = "MONGODB_URI"
-        value = var.MONGODB_URI
-      }
-    }
+resource "azurerm_subnet" "snet" {
+  name = "snt-${var.PROJECT_NAME}"
+  resource_group_name = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vn.name
+  address_prefixes = [ "10.10.0.1/24" ]
+}
+
+resource "azurerm_kubernetes_cluster" "aks01" {
+  name                = "aks-${var.PROJECT_NAME}"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  dns_prefix          = "vault-aks-demo"
+  private_cluster_enabled = true
+
+  default_node_pool {
+    name       = "default"
+    node_count = 2
+    vm_size    = "Standard_D2_v2"
+    vnet_subnet_id = azurerm_subnet.snet.id
   }
 
-  ingress {
-    allow_insecure_connections = false
-    external_enabled = true
-    target_port = 80
-    transport = "http"
-    traffic_weight {
-      percentage = 100
-      latest_revision = true
-    }
+  identity {
+    type = "SystemAssigned"
   }
 
-  secret {
-    name = "pat"
-    value = var.PAT
+  tags = {
+    Environment = "Development"
   }
-  registry {
-    server = var.CR_HOST
-    password_secret_name = "pat"
-    username = var.USERNAME
-  }
+}
+
+output "client_certificate" {
+  value     = azurerm_kubernetes_cluster.aks01.kube_config.0.client_certificate
+  sensitive = true
+}
+
+output "kube_config" {
+  value = azurerm_kubernetes_cluster.aks01.kube_config_raw
+
+  sensitive = true
 }
